@@ -38,7 +38,7 @@ class Artwork(models.Model):
     Date = models.CharField(max_length=16)
     Medium = models.CharField(max_length=128)
     Dimensions = models.CharField(max_length=128)
-    Creditline = models.CharField(max_length=256)
+    CreditLine = models.CharField(max_length=256)
     AccessionNumber = models.CharField(max_length=16)
     Classification = models.CharField(max_length=32)
     Department = models.CharField(max_length=128)
@@ -47,7 +47,7 @@ class Artwork(models.Model):
     ObjectID = models.IntegerField()
     URL = models.CharField(max_length=128)
     ThumbnailURL = models.CharField(max_length=256)
-    Height = models.FloatField()
-    Width = models.FloatField()
+    Height = models.FloatField(null=True)
+    Width = models.FloatField(null=True)
 
     objects = Manager()
