@@ -1,0 +1,5 @@
+.idea
+.ropeproject
+*.py[cod]
+node_modules/
+*.sqlite[3]
