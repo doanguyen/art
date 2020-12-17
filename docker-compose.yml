@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  frontend:
+    build: frontend
+    volumes:
+      - ./frontend/:/app/
+    ports:
+      - "8000:8000"
+  backend:
+    build: backend
+    volumes:
+      - ./backend/:/app/
+  db:
+    image: postegres:12.1
+    environment:
+      POSTGRES_USER: art
+      POSTGRES_PASSWORD: changeme  # dev only
+      POSTGRES_DB: art_db
