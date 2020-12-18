@@ -1,0 +1,6 @@
+<h1>Artworks</h1>
+
+
+<ng-container *ngFor=" let artwork of artworks$|async as artworks">
+  <li>{{artwork.Title}} <img src="{{artwork.ThumbnailURL}}" alt=""></li>
+</ng-container>
