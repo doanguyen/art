@@ -1,10 +1,17 @@
-from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
+from rest_framework.generics import (
+    RetrieveUpdateDestroyAPIView,
+    ListCreateAPIView,
+)
 
 from art.models import Artwork
 from art.serializers import ArtworkSerializer
 
 
-class ArtworksListView(ListAPIView):
+class ArtworksListView(ListCreateAPIView):
+    """Returns list of artworks or create one
+    Endpoint: /api/artworks
+    """
+
     serializer_class = ArtworkSerializer
     queryset = Artwork.objects.all()
 
@@ -13,9 +20,13 @@ artworks_list_view = ArtworksListView.as_view()
 
 
 class ArtworkObjectView(RetrieveUpdateDestroyAPIView):
+    """Returns single artwork objects and beable to update/destroy it using its `id`
+    Endpoint: /api/artworks/<id>
+    """
+
     serializer_class = ArtworkSerializer
     queryset = Artwork.objects.all()
-    lookup_field = "ConstituentID"
+    lookup_field = "id"
 
     def get_serializer(self, *args, **kwargs):
         kwargs["partial"] = True
@@ -23,10 +34,3 @@ class ArtworkObjectView(RetrieveUpdateDestroyAPIView):
 
 
 artwork_object_view = ArtworkObjectView.as_view()
-
-
-class ArtworkCreateView(CreateAPIView):
-    serializer_class = ArtworkSerializer
-
-
-artwork_create_view = ArtworkCreateView.as_view()

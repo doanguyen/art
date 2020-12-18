@@ -52,26 +52,26 @@ class CreateArtworkTestCase(BaseArtTestCase):
             "ConstituentID": 11,
             "Title": "New artwork",
             "Artist": "New artist",
-            'BeginDate': '1990',
-            'ObjectID': 2000,
-            'Height': 19.20,
-            'Width': 21,
-            'AccessionNumber': 'AccessionNumber',
-            "ArtistBio": 'ArtistBio',
-            "Cataloged": 'Cataloged',
-            'Classification': 'Classification',
-            'Creditline': 'Creditline',
-            'Date': '20/10/1991',
-            'DateAcquired': '2/1/2222',
-            'Department': 'Department',
-            'Dimensions': 'Dimensions',
-            'Gender': 'Male',
-            'Medium': "Medium",
-            'Nationality': "France",
-            'ThumbnailURL': 'http://url',
-            'URL': "http://url"
+            "BeginDate": "1990",
+            "ObjectID": 2000,
+            "Height": 19.20,
+            "Width": 21,
+            "AccessionNumber": "AccessionNumber",
+            "ArtistBio": "ArtistBio",
+            "Cataloged": "Cataloged",
+            "Classification": "Classification",
+            "CreditLine": "Creditline",
+            "Date": "20/10/1991",
+            "DateAcquired": "2/1/2222",
+            "Department": "Department",
+            "Dimensions": "Dimensions",
+            "Gender": "Male",
+            "Medium": "Medium",
+            "Nationality": "France",
+            "ThumbnailURL": "http://url",
+            "URL": "http://url",
         }
-        self.url = reverse("artwork_create")
+        self.url = reverse("artworks")
 
     def test_it_should_be_able_to_create_an_complete_artwork(self):
         response = self.client.post(self.url, self.artwork_to_create)
@@ -79,20 +79,18 @@ class CreateArtworkTestCase(BaseArtTestCase):
 
     def test_it_should_not_be_able_to_create_an_incomplete_artwork(self):
         incomplete_artwork = self.artwork_to_create.copy()
-        incomplete_artwork.pop('ConstituentID', None)
+        incomplete_artwork.pop("ConstituentID", None)
         response = self.client.post(self.url, incomplete_artwork)
         self.assertEqual(response.status_code, 400)
-        self.assertIn('ConstituentID', response.json().keys())
-        self.assertIn('This field is required.', response.json()['ConstituentID'])
+        self.assertIn("ConstituentID", response.json().keys())
+        self.assertIn("This field is required.", response.json()["ConstituentID"])
 
 
 class SingleArtworkTestCase(BaseArtTestCase):
     def setUp(self) -> None:
         super().setUp()
         self.artwork = self.artworks_list[0]
-        self.url = reverse(
-            "artwork", kwargs={"ConstituentID": self.artwork.ConstituentID}
-        )
+        self.url = reverse("artwork_object", kwargs={"id": self.artwork.id})
 
     def test_it_should_be_able_to_retrieve_the_artwork_with_constituent_id(self):
         response = self.client.get(self.url)
