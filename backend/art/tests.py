@@ -39,10 +39,10 @@ class ArtworksTestCase(BaseArtTestCase):
         response = self.client.get(self.home_url)
         self.assertEqual(response.status_code, 200)
 
-    def test_it_should_display_the_artwork_view(self):
+    def test_it_should_display_the_artworks_view(self):
         response = self.client.get(self.artworks_list_url)
         self.assertEqual(response.status_code, 200)
-        self.assertIn("Title", response.json()[0].keys())
+        self.assertIn("Title", response.json()["results"][0].keys())
 
 
 class CreateArtworkTestCase(BaseArtTestCase):
