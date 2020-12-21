@@ -5,12 +5,24 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {HttpClientModule} from '@angular/common/http';
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 const MaterialModules = [
-  MatToolbarModule
+  MatToolbarModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatPaginatorModule
 ];
 
-const CommonSharedModules = [CommonModule, RouterModule, MatIconModule, MatButtonModule, HttpClientModule, ...MaterialModules];
+const CommonSharedModules = [CommonModule, RouterModule, MatIconModule, MatSelectModule,
+  MatButtonModule, ReactiveFormsModule, HttpClientModule, ...MaterialModules];
 
 @NgModule({
   imports: CommonSharedModules,

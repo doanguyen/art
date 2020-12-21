@@ -1,7 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ArtworkService} from '../../services/artwork.service';
-import {Observable} from 'rxjs';
-import {Artwork} from '../../models';
+import {combineLatest, Observable} from 'rxjs';
+import {ArtworksResponse, DisplayMode} from '../../models';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import {ActivatedRoute, Router} from '@angular/router';
+import {switchMap, tap} from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-artwork-list',
@@ -9,14 +14,58 @@ import {Artwork} from '../../models';
   styleUrls: ['./artwork-list.component.scss']
 })
 export class ArtworkListComponent implements OnInit {
-  artworks$: Observable<Artwork[]>;
+  artworksResponse$: Observable<ArtworksResponse>;
+  displayMode = DisplayMode.Card;
+  page: number;
+  keyword: string;
+  nationality: string;
 
-  constructor(private artworkService: ArtworkService) {
+  filterFormGroup: FormGroup;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  constructor(private artworkService: ArtworkService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.artworks$ = this.artworkService.artworks$;
-    this.artworkService.fetch_artworks();
+    this.artworksResponse$ = combineLatest([this.route.queryParams]).pipe(
+      tap(([params]) => {
+        // tslint:disable-next-line:prefer-const
+        let {page, keyword, nationality} = params;
+        page = +page + 1;
+        this.keyword = keyword;
+        this.nationality = nationality;
+      }),
+      switchMap(([params]) => this.artworkService.queryArtworks(params)
+      )
+    );
+    this.filterFormGroup = this.fb.group({
+      keyword: [''],
+      nationality: ['']
+    });
+  }
+
+  gotoFilter(): void {
+    const queryParams = {
+      keyword: this.filterFormGroup.get('keyword').value,
+      nationality: this.filterFormGroup.get('nationality').value
+    };
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams,
+      queryParamsHandling: '',
+    });
+  }
+
+  gotoPage($event: PageEvent): void {
+    const page = $event.pageIndex;
+    const queryParams = {page: page + 1};
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams,
+        queryParamsHandling: 'merge', // remove to replace all query params by provided
+      });
   }
 
 }

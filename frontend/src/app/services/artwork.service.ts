@@ -1,19 +1,28 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject} from 'rxjs';
-import {Artwork, ArtworksResponse} from '../models';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {ArtworksResponse} from '../models';
+import {filter} from 'rxjs/operators';
+import {Params, Router, UrlSerializer} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArtworkService {
-  private readonly artworks = new BehaviorSubject<Artwork[]>([]);
-  artworks$ = this.artworks.asObservable();
+  private readonly artworksResponse = new BehaviorSubject<ArtworksResponse>(null);
+  artworksResponse$ = this.artworksResponse.asObservable().pipe(filter(a => !!a));
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router, private serializer: UrlSerializer) {
   }
 
   fetch_artworks(): void {
-    this.http.get<ArtworksResponse>('/api/artworks').subscribe(r => this.artworks.next(r.results));
+    this.http.get<ArtworksResponse>('/api/artworks').subscribe(r => {
+      this.artworksResponse.next(r);
+    });
+  }
+
+  queryArtworks(params: Params): Observable<ArtworksResponse> {
+    const tree = this.router.createUrlTree(['/api', 'artworks'], {queryParams: params});
+    return this.http.get<ArtworksResponse>(this.serializer.serialize(tree));
   }
 }

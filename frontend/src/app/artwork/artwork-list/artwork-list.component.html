@@ -1,6 +1,39 @@
-<h1>Artworks</h1>
+<ng-container *ngIf="artworksResponse$|async as r">
+  <div class="d-flex">
+    <h1 class="flex-grow-1">Artworks ({{r.count}} items)</h1>
+    <button class="m-3 btn-black" mat-stroked-button>
+      <mat-icon>add</mat-icon>
+      Add artwork
+    </button>
+  </div>
 
+  <div class="row filter">
+    <form [formGroup]="filterFormGroup">
+      <mat-form-field appearance="fill" class="me-3">
+        <mat-label>Keyword</mat-label>
+        <input matInput formControlName="keyword">
+      </mat-form-field>
 
-<ng-container *ngFor=" let artwork of artworks$|async as artworks">
-  <li>{{artwork.Title}} <img src="{{artwork.ThumbnailURL}}" alt=""></li>
+      <mat-form-field appearance="fill" class="me-3">
+        <mat-label>Select</mat-label>
+        <mat-select formControlName="nationality">
+          <mat-option value="option">Option</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-button (click)="gotoFilter()">Apply</button>
+    </form>
+  </div>
+
+  <div class="row">
+    <div *ngFor=" let artwork of r.results" class="col-3 col-lg-3 col-sm-6 col-12 align-self-stretch mb-2 pb-2">
+      <app-artwork-card [artwork]="artwork" [displayMode]="displayMode"></app-artwork-card>
+    </div>
+    <mat-paginator #paginator [length]="r.count"
+                   [pageSize]="24"
+                   [pageIndex]="page"
+                   (page)="gotoPage($event)"
+    >
+    </mat-paginator>
+  </div>
 </ng-container>
