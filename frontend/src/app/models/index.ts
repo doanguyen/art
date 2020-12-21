@@ -36,3 +36,7 @@ export interface ArtworkResponse {
   count: number;
   results: Artwork[];
 }
+
+export interface DialogData {
+  artwork: Artwork;
+}
