@@ -1,14 +1,18 @@
 <ng-container *ngIf="displayMode == DisplayMode.Card; else ListDisplay">
   <mat-card class="card-height pointer" (click)="gotoArtwork(artwork)">
-    <img mat-card-image src="{{artwork.ThumbnailURL}}" alt="{{artwork.Title}}" class="card-image" (error)="imageError($event)">
+    <img
+      mat-card-image
+      src="{{ artwork.ThumbnailURL }}"
+      alt="{{ artwork.Title }}"
+      class="card-image"
+      (error)="imageError($event)"
+    />
     <mat-card-content>
       <h3>
-        {{artwork.Title}}
+        {{ artwork.Title }}
       </h3>
     </mat-card-content>
   </mat-card>
-
-
 </ng-container>
 <ng-template #ListDisplay>
   Hello world

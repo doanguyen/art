@@ -1,49 +1,46 @@
 <div mat-dialog-title>
   <h1>
-    {{artwork ? 'Modify Artwork' : 'Create a new Artwork'}}
+    {{ artwork ? "Modify Artwork" : "Create a new Artwork" }}
   </h1>
-
 </div>
 <div mat-dialog-content>
   <form [formGroup]="artworkForm" class="row">
     <mat-form-field appearance="fill" class="col-12">
       <mat-label>Title</mat-label>
-      <input matInput formControlName="Title">
+      <input matInput formControlName="Title" />
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Creditline</mat-label>
-      <input matInput formControlName="CreditLine">
+      <input matInput formControlName="CreditLine" />
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Date</mat-label>
-      <input matInput formControlName="Date">
+      <input matInput formControlName="Date" />
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Medium</mat-label>
-      <input matInput formControlName="Medium">
+      <input matInput formControlName="Medium" />
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Classification</mat-label>
-      <input matInput formControlName="Classification">
+      <input matInput formControlName="Classification" />
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Department</mat-label>
-      <input matInput formControlName="Department">
+      <input matInput formControlName="Department" />
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>DateAcquired</mat-label>
-      <input matInput formControlName="DateAcquired">
+      <input matInput formControlName="DateAcquired" />
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>URL</mat-label>
-      <input matInput formControlName="URL">
+      <input matInput formControlName="URL" />
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>ThumbnailURL</mat-label>
-      <input matInput formControlName="ThumbnailURL">
+      <input matInput formControlName="ThumbnailURL" />
     </mat-form-field>
-
-
   </form>
 </div>
 <div mat-dialog-actions>

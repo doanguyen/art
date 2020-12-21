@@ -2,17 +2,35 @@
   <ng-container>
     <mat-toolbar class="moma-navbar">
       <div class="container">
-        <img src="assets/logo.png" alt="logo" class="logo">
-        <button mat-button class="navbar-btn" [routerLink]="['/']" disableRipple routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}">
+        <img src="assets/logo.png" alt="logo" class="logo" />
+        <button
+          mat-button
+          class="navbar-btn"
+          [routerLink]="['/']"
+          disableRipple
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
           <mat-icon>home</mat-icon>
           Home
         </button>
-        <button mat-button class="navbar-btn" [routerLink]="['/', 'artworks']" routerLinkActive="active" disableRipple>
+        <button
+          mat-button
+          class="navbar-btn"
+          [routerLink]="['/', 'artworks']"
+          routerLinkActive="active"
+          disableRipple
+        >
           <mat-icon>palette</mat-icon>
           Artwork
         </button>
-        <button mat-button class="navbar-btn" [routerLink]="['/', 'artists']" routerLinkActive="active" disableRipple>
+        <button
+          mat-button
+          class="navbar-btn"
+          [routerLink]="['/', 'artists']"
+          routerLinkActive="active"
+          disableRipple
+        >
           <mat-icon>person_pin</mat-icon>
           Artist
         </button>
@@ -26,7 +44,10 @@
 
   <footer>
     <div class="container my-3">
-      The dataset is taken from <a href="https://github.com/MuseumofModernArt/collection">The Museum of Modern Art</a>
+      The dataset is taken from
+      <a href="https://github.com/MuseumofModernArt/collection"
+        >The Museum of Modern Art</a
+      >
     </div>
   </footer>
 </div>

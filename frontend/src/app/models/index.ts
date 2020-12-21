@@ -1,6 +1,6 @@
 export enum DisplayMode {
   Card,
-  List,
+  List
 }
 
 export interface Artist {
