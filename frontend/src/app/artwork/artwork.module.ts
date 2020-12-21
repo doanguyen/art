@@ -7,6 +7,7 @@ import { ArtworkCardComponent } from './artwork-card/artwork-card.component';
 import {SharedModule} from '../shared/shared.module';
 import {ArtworkDisplayComponent} from './artwork-display/artwork-display.component';
 import { DeleteDialogComponent } from './artwork-display/delete-dialog.component';
+import { ArtworkModifyComponent } from './artwork-modify/artwork-modify.component';
 
 
 @NgModule({
@@ -15,6 +16,6 @@ import { DeleteDialogComponent } from './artwork-display/delete-dialog.component
     SharedModule,
     ArtworkRoutingModule
   ],
-  declarations: [ArtworkListComponent, ArtworkCardComponent, ArtworkDisplayComponent, DeleteDialogComponent]
+  declarations: [ArtworkListComponent, ArtworkCardComponent, ArtworkDisplayComponent, DeleteDialogComponent, ArtworkModifyComponent]
 })
 export class ArtworkModule { }

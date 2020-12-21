@@ -37,6 +37,6 @@ export interface ArtworkResponse {
   results: Artwork[];
 }
 
-export interface DialogData {
+export interface ArtworkDialogData {
   artwork: Artwork;
 }

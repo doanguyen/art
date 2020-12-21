@@ -1,7 +1,7 @@
 <ng-container *ngIf="artworksResponse$|async as r">
   <div class="d-flex">
     <h1 class="flex-grow-1">Artworks ({{r.count}} items)</h1>
-    <button class="m-3 btn-black" mat-stroked-button>
+    <button class="m-3 btn-black" mat-stroked-button (click)="showModifyDialog()">
       <mat-icon>add</mat-icon>
       Add artwork
     </button>

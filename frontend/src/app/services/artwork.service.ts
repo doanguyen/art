@@ -23,4 +23,12 @@ export class ArtworkService {
   deleteArtwork(artwork: Artwork): Observable<any> {
     return this.http.delete(`/api/artworks/${artwork.id}`);
   }
+
+  createArtwork(artwork: Partial<Artwork>): Observable<Artwork> {
+    return this.http.post<Artwork>('/api/artworks', artwork);
+  }
+
+  updateArtwork(id: number, artwork: Partial<Artwork>): Observable<Artwork> {
+    return this.http.patch<Artwork>(`/api/artworks/${id}`, artwork);
+  }
 }
