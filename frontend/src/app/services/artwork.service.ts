@@ -10,6 +10,7 @@ import {Params, Router, UrlSerializer} from '@angular/router';
 export class ArtworkService {
   constructor(private http: HttpClient, private router: Router, private serializer: UrlSerializer) {
   }
+
   queryArtworks(params: Params): Observable<ArtworkResponse> {
     const tree = this.router.createUrlTree(['/api', 'artworks'], {queryParams: params});
     return this.http.get<ArtworkResponse>(this.serializer.serialize(tree));
@@ -17,5 +18,9 @@ export class ArtworkService {
 
   queryArtwork(id: string): Observable<Artwork> {
     return this.http.get<Artwork>(`/api/artworks/${id}`);
+  }
+
+  deleteArtwork(artwork: Artwork): Observable<any> {
+    return this.http.delete(`/api/artworks/${artwork.id}`);
   }
 }
