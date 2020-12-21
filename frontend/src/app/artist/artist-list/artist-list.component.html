@@ -1,0 +1,21 @@
+<div *ngIf="artistResponse$|async as artistResponse else loading">
+  <h1>Artists ({{artistResponse.count}} artists)</h1>
+  <div class="row pb-4">
+    <div *ngFor="let artist of artistResponse.results" class="col-4 py-1">
+      <a (click)="gotoArtworkByArtist(artist)">
+        {{artist.DisplayName}}
+      </a>
+    </div>
+  </div>
+  <mat-paginator #paginator [length]="artistResponse.count"
+                 [pageSize]="24"
+                 [pageIndex]="page"
+                 (page)="gotoPage($event)"
+  >
+  </mat-paginator>
+</div>
+
+
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+</ng-template>

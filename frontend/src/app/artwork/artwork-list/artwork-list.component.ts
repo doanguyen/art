@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ArtworkService} from '../../services/artwork.service';
 import {combineLatest, Observable} from 'rxjs';
-import {ArtworksResponse, DisplayMode} from '../../models';
+import {ArtworkResponse, DisplayMode} from '../../models';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -15,7 +15,7 @@ import {ArtistService} from '../../services/artist.service';
   styleUrls: ['./artwork-list.component.scss']
 })
 export class ArtworkListComponent implements OnInit {
-  artworksResponse$: Observable<ArtworksResponse>;
+  artworksResponse$: Observable<ArtworkResponse>;
   displayMode = DisplayMode.Card;
   nationality$ = this.artistService.listNationality$;
   page: number;
@@ -33,7 +33,7 @@ export class ArtworkListComponent implements OnInit {
       tap(([params]) => {
         // tslint:disable-next-line:prefer-const
         let {page, keyword, nationality} = params;
-        page = +page + 1;
+        this.page = page - 1;
         this.keyword = keyword;
         this.nationality = nationality;
       }),

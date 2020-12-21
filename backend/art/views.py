@@ -69,7 +69,7 @@ class ArtistListView(ListAPIView):
     serializer_class = ArtistSerializer
     pagination_class = LargeResultsSetPagination
 
-    queryset = Artist.objects.all()
+    queryset = Artist.objects.order_by("-BeginDate").all()
 
 
 artist_list_view = ArtistListView.as_view()
