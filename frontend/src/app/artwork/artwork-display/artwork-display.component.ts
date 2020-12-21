@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs';
-import {Artwork} from '../../models';
-import {switchMap} from 'rxjs/operators';
-import {ArtworkService} from '../../services/artwork.service';
-import {MatDialog} from '@angular/material/dialog';
-import {DeleteDialogComponent} from './delete-dialog.component';
-import {ArtworkModifyComponent} from '../artwork-modify/artwork-modify.component';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Artwork } from '../../models';
+import { switchMap } from 'rxjs/operators';
+import { ArtworkService } from '../../services/artwork.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from './delete-dialog.component';
+import { ArtworkModifyComponent } from '../artwork-modify/artwork-modify.component';
 
 @Component({
   selector: 'app-artwork-display',
@@ -16,8 +16,11 @@ import {ArtworkModifyComponent} from '../artwork-modify/artwork-modify.component
 export class ArtworkDisplayComponent implements OnInit {
   artwork$: Observable<Artwork>;
 
-  constructor(private route: ActivatedRoute, private artworkService: ArtworkService,
-              private dialog: MatDialog) { }
+  constructor(
+    private route: ActivatedRoute,
+    private artworkService: ArtworkService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.artwork$ = this.route.paramMap.pipe(
@@ -26,11 +29,16 @@ export class ArtworkDisplayComponent implements OnInit {
   }
 
   openDeleteDialog(artwork: Artwork): void {
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {width: '450px', data: {artwork}});
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '450px',
+      data: { artwork }
+    });
   }
 
   showModifyDialog(artwork: Artwork): void {
-    this.dialog.open(ArtworkModifyComponent, {width: '500px', data: {artwork}});
+    this.dialog.open(ArtworkModifyComponent, {
+      width: '500px',
+      data: { artwork }
+    });
   }
 }
-

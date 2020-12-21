@@ -1,9 +1,9 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {Artwork, ArtworkDialogData} from '../../models';
-import {ArtworkService} from '../../services/artwork.service';
-import {Router} from '@angular/router';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Artwork, ArtworkDialogData } from '../../models';
+import { ArtworkService } from '../../services/artwork.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-delete-dialog',
@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
     <h1 mat-dialog-title>DELETE</h1>
     <div mat-dialog-content>
       <p>
-        <strong>{{artwork.Title}}</strong>
+        <strong>{{ artwork.Title }}</strong>
       </p>
       <small>This action is inreversable</small>
     </div>
@@ -24,19 +24,21 @@ import {Router} from '@angular/router';
 export class DeleteDialogComponent implements OnInit {
   artwork: Artwork = this.data.artwork;
 
-  constructor(public dialogRef: MatDialogRef<DeleteDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: ArtworkDialogData,
-              private artworkService: ArtworkService, private snackbar: MatSnackBar, private router: Router) {
-  }
+  constructor(
+    public dialogRef: MatDialogRef<DeleteDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: ArtworkDialogData,
+    private artworkService: ArtworkService,
+    private snackbar: MatSnackBar,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   deleteArtwork(): void {
     this.artworkService.deleteArtwork(this.artwork).subscribe(() => {
-      this.snackbar.open('Deleted', 'Close', {duration: 2000});
+      this.snackbar.open('Deleted', 'Close', { duration: 2000 });
       this.dialogRef.close();
       this.router.navigate(['artworks']);
     });
   }
-
 }

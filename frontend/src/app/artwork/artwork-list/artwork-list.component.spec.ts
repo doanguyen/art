@@ -8,9 +8,8 @@ describe('ArtworkListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ArtworkListComponent ]
-    })
-    .compileComponents();
+      declarations: [ArtworkListComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
