@@ -13,6 +13,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatListModule} from '@angular/material/list';
 
 
 const MaterialModules = [
@@ -22,7 +23,8 @@ const MaterialModules = [
   MatInputModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
-  MatGridListModule
+  MatGridListModule,
+  MatListModule
 ];
 
 const CommonSharedModules = [CommonModule, RouterModule, MatIconModule, MatSelectModule,

@@ -27,7 +27,12 @@ export interface Artwork {
   ConstituentID: Artist[];
 }
 
-export interface ArtworksResponse {
+export interface ArtistResponse {
+  count: number;
+  results: Artist[];
+}
+
+export interface ArtworkResponse {
   count: number;
   results: Artwork[];
 }
