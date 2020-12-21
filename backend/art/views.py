@@ -29,12 +29,15 @@ class ArtworksListView(ListCreateAPIView):
         query_params = self.request.query_params
         keyword = query_params.get("keyword", default=None)
         nationality = query_params.get("nationality", default=None)
+        artist = query_params.get("artist", default=None)
         queryset = Artwork.objects.prefetch_related("ConstituentID").all()
 
         if keyword:
             queryset = queryset.filter(Title__icontains=keyword)
         if nationality:
             queryset = queryset.filter(ConstituentID__Nationality=nationality)
+        if artist:
+            queryset = queryset.filter(ConstituentID__DisplayName__icontains=artist)
         return queryset
 
 

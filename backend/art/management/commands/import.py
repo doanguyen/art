@@ -62,6 +62,9 @@ class Command(BaseCommand):
                 SeatHeight,
                 Duration,
             ) = row
+            artwork = Artwork.objects.filter(ObjectID=ObjectID).first()
+            if not artwork:
+                continue
 
             if "," in ConstituentID:
                 ConstituentID = clean(ConstituentID).split(",")
@@ -71,10 +74,12 @@ class Command(BaseCommand):
             if isinstance(ConstituentID, list):
                 for c in ConstituentID:
                     if c:
-                        consituents.append(ConstituentModel(artwork_id=id, artist_id=c))
+                        consituents.append(
+                            ConstituentModel(artwork_id=artwork.id, artist_id=c)
+                        )
             elif isinstance(ConstituentID, int) and ConstituentID:
                 consituents.append(
-                    ConstituentModel(artwork_id=id, artist_id=ConstituentID)
+                    ConstituentModel(artwork_id=artwork.id, artist_id=ConstituentID)
                 )
             else:
                 pass
