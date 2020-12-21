@@ -11,6 +11,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 const MaterialModules = [
@@ -18,7 +20,9 @@ const MaterialModules = [
   MatCardModule,
   MatFormFieldModule,
   MatInputModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatProgressSpinnerModule,
+  MatGridListModule
 ];
 
 const CommonSharedModules = [CommonModule, RouterModule, MatIconModule, MatSelectModule,

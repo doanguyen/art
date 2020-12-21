@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Artwork, DisplayMode} from '../../models';
+import {Router} from "@angular/router"
 
 @Component({
     selector: 'app-artwork-card',
@@ -13,7 +14,7 @@ export class ArtworkCardComponent implements OnInit {
 
     defaultImage = '/assets/logo.png';
 
-    constructor() {
+    constructor(private router: Router) {
     }
 
     ngOnInit(): void {
@@ -27,5 +28,9 @@ export class ArtworkCardComponent implements OnInit {
             // @ts-ignore
             $event.target.style['object-fit'] = 'none';
         }
+    }
+
+    gotoArtwork(artwork: Artwork): void {
+        this.router.navigate(['/artworks', artwork.id]);
     }
 }

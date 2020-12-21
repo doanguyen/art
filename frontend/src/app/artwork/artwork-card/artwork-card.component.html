@@ -1,5 +1,5 @@
 <ng-container *ngIf="displayMode == DisplayMode.Card; else ListDisplay">
-  <mat-card class="card-height">
+  <mat-card class="card-height" (click)="gotoArtwork(artwork)">
     <img mat-card-image src="{{artwork.ThumbnailURL}}" alt="{{artwork.Title}}" class="card-image" (error)="imageError($event)">
     <mat-card-content>
       <h3>

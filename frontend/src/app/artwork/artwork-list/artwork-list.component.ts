@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {ActivatedRoute, Router} from '@angular/router';
 import {switchMap, tap} from 'rxjs/operators';
+import {ArtistService} from '../../services/artist.service';
 
 
 @Component({
@@ -16,6 +17,7 @@ import {switchMap, tap} from 'rxjs/operators';
 export class ArtworkListComponent implements OnInit {
   artworksResponse$: Observable<ArtworksResponse>;
   displayMode = DisplayMode.Card;
+  nationality$ = this.artistService.listNationality$;
   page: number;
   keyword: string;
   nationality: string;
@@ -23,7 +25,7 @@ export class ArtworkListComponent implements OnInit {
   filterFormGroup: FormGroup;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private artworkService: ArtworkService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
+  constructor(private artworkService: ArtworkService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private artistService: ArtistService) {
   }
 
   ngOnInit(): void {

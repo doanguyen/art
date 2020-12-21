@@ -15,9 +15,10 @@
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="me-3">
-        <mat-label>Select</mat-label>
+        <mat-label>Nationality</mat-label>
         <mat-select formControlName="nationality">
-          <mat-option value="option">Option</mat-option>
+          <mat-option value="">All</mat-option>
+          <mat-option [value]="nationality" *ngFor="let nationality of nationality$|async">{{nationality}}</mat-option>
         </mat-select>
       </mat-form-field>
 

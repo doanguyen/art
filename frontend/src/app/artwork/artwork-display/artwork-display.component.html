@@ -1,0 +1,65 @@
+<div *ngIf="artwork$|async as artwork else loading">
+  <h1>
+    {{artwork.Title}}
+    <span class="menu">
+      <a class="update pe-2">Edit</a>
+      <a class="delete">Delete</a>
+    </span>
+  </h1>
+
+  <div class="display">
+    <img src="{{artwork.ThumbnailURL}}" alt="{{artwork.Title}}">
+
+    <p>
+      {{artwork.CreditLine}}
+    </p>
+  </div>
+
+  <div class="description row">
+    <h2>Description</h2>
+    <div class="col-6 row py-2">
+      <span class="col-3"><strong>Date:</strong></span> {{artwork.Date}}
+    </div>
+    <div class="col-6 row py-2">
+      <span class="col-3">
+        <strong>Medium:</strong>
+      </span>
+      {{artwork.Medium}}
+    </div>
+    <div class="col-6 row py-2">
+      <span class="col-3">
+        <strong>Dimension:</strong>
+      </span>
+      {{artwork.Dimensions}}
+    </div>
+    <div class="col-6 row py-2">
+      <span class="col-3">
+        <strong>Classification:</strong>
+      </span>
+      {{artwork.Classification}}
+    </div>
+    <div class="col-6 row py-2">
+      <span class="col-3">
+        <strong>Department:</strong>
+      </span>
+      {{artwork.Department}}
+    </div>
+    <div class="col-6 row py-2">
+      <span class="col-3">
+        <strong>DateAcquired:</strong>
+      </span>
+      {{artwork.DateAcquired}}
+    </div>
+    <div class="col-6 row py-2">
+      <span class="col-3">
+        <strong>Original URL:</strong>
+      </span>
+      <a href="{{artwork.URL}}" class="col-9">Link</a>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+</ng-template>
