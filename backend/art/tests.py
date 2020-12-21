@@ -1,4 +1,4 @@
-from random import uniform
+from random import uniform, randint
 from unittest import skip
 
 import factory
@@ -7,7 +7,18 @@ from django.urls import reverse
 from factory.django import DjangoModelFactory
 from rest_framework.test import APIClient
 
-from art.models import Artwork
+from art.models import Artwork, Artist
+
+
+class ArtistFactory(DjangoModelFactory):
+    DisplayName = factory.Faker("name")
+    ArtistBio = factory.Faker("sentence")
+    Nationality = factory.Faker("country")
+    BeginDate = randint(1800, 2000)
+    EndDate = randint(1900, 2000)
+
+    class Meta:
+        model = Artist
 
 
 class ArtworkFactory(DjangoModelFactory):
@@ -25,6 +36,7 @@ class BaseArtTestCase(TestCase):
 
     def setUp(self) -> None:
         self.artworks_list = ArtworkFactory.create_batch(5)
+        self.artists_list = ArtistFactory.create_batch(5)
 
 
 class ArtworksTestCase(BaseArtTestCase):
@@ -109,3 +121,12 @@ class SingleArtworkTestCase(BaseArtTestCase):
 
         response_after_delete = self.client.get(self.url)
         self.assertEqual(response_after_delete.status_code, 404, "It should be deleted")
+
+
+class ArtistNationalityTestCase(BaseArtTestCase):
+    url = reverse("artists_nationality")
+
+    def test_it_shoud_returns_list_of_nationality(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(self.artists_list[0].Nationality, response.json())

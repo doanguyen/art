@@ -4,6 +4,8 @@ from rest_framework.generics import (
     ListAPIView,
 )
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from art.models import Artwork, Artist
 from art.serializers import ArtworkSerializer, ArtistSerializer
@@ -27,7 +29,7 @@ class ArtworksListView(ListCreateAPIView):
         query_params = self.request.query_params
         keyword = query_params.get("keyword", default=None)
         nationality = query_params.get("nationality", default=None)
-        queryset = Artwork.objects.all()
+        queryset = Artwork.objects.prefetch_related("ConstituentID").all()
 
         if keyword:
             queryset = queryset.filter(Title__icontains=keyword)
@@ -68,3 +70,16 @@ class ArtistListView(ListAPIView):
 
 
 artist_list_view = ArtistListView.as_view()
+
+
+class ArtistNationalityView(APIView):
+    """Returns list of different nationality
+    Endpoint: /api/artists/nationality
+    """
+
+    def get(self, request):
+        values = Artist.objects.values_list("Nationality", flat=True).distinct()
+        return Response([value for value in values if value])
+
+
+artist_nationality_view = ArtistNationalityView.as_view()
