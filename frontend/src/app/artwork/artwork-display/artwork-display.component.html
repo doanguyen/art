@@ -2,7 +2,7 @@
   <h1>
     {{artwork.Title}}
     <span class="menu">
-      <a class="update pe-2">Edit</a>
+      <a class="update pe-2" (click)="showModifyDialog(artwork)">Edit</a>
       <a class="delete" (click)="openDeleteDialog(artwork)">Delete</a>
     </span>
   </h1>

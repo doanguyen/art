@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {Artwork, DialogData} from '../../models';
+import {Artwork, ArtworkDialogData} from '../../models';
 import {ArtworkService} from '../../services/artwork.service';
 import {Router} from '@angular/router';
 
@@ -18,15 +18,13 @@ import {Router} from '@angular/router';
     <div mat-dialog-actions>
       <button mat-button (click)="deleteArtwork()">OK</button>
     </div>
-
-
   `,
   styles: []
 })
 export class DeleteDialogComponent implements OnInit {
   artwork: Artwork = this.data.artwork;
 
-  constructor(public dialogRef: MatDialogRef<DeleteDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  constructor(public dialogRef: MatDialogRef<DeleteDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: ArtworkDialogData,
               private artworkService: ArtworkService, private snackbar: MatSnackBar, private router: Router) {
   }
 

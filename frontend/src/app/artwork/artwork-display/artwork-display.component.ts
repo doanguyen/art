@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Artwork} from '../../models';
 import {switchMap} from 'rxjs/operators';
 import {ArtworkService} from '../../services/artwork.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {DeleteDialogComponent} from './delete-dialog.component';
+import {ArtworkModifyComponent} from '../artwork-modify/artwork-modify.component';
 
 @Component({
   selector: 'app-artwork-display',
@@ -28,5 +29,8 @@ export class ArtworkDisplayComponent implements OnInit {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {width: '450px', data: {artwork}});
   }
 
+  showModifyDialog(artwork: Artwork): void {
+    this.dialog.open(ArtworkModifyComponent, {width: '500px', data: {artwork}});
+  }
 }
 
