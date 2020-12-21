@@ -1,15 +1,16 @@
 from rest_framework.generics import (
     RetrieveUpdateDestroyAPIView,
     ListCreateAPIView,
+    ListAPIView,
 )
 from rest_framework.pagination import PageNumberPagination
 
-from art.models import Artwork
-from art.serializers import ArtworkSerializer
+from art.models import Artwork, Artist
+from art.serializers import ArtworkSerializer, ArtistSerializer
 
 
 class LargeResultsSetPagination(PageNumberPagination):
-    page_size = 10
+    page_size = 24
     page_size_query_param = "page_size"
     max_page_size = 200
 
@@ -21,7 +22,18 @@ class ArtworksListView(ListCreateAPIView):
 
     serializer_class = ArtworkSerializer
     pagination_class = LargeResultsSetPagination
-    queryset = Artwork.objects.all()
+
+    def get_queryset(self):
+        query_params = self.request.query_params
+        keyword = query_params.get("keyword", default=None)
+        nationality = query_params.get("nationality", default=None)
+        queryset = Artwork.objects.all()
+
+        if keyword:
+            queryset = queryset.filter(Title__icontains=keyword)
+        if nationality:
+            queryset = queryset.filter(ConstituentID__Nationality=nationality)
+        return queryset
 
 
 artworks_list_view = ArtworksListView.as_view()
@@ -42,3 +54,17 @@ class ArtworkObjectView(RetrieveUpdateDestroyAPIView):
 
 
 artwork_object_view = ArtworkObjectView.as_view()
+
+
+class ArtistListView(ListAPIView):
+    """Returns list of artists
+    Endpoint: /api/artists
+    """
+
+    serializer_class = ArtistSerializer
+    pagination_class = LargeResultsSetPagination
+
+    queryset = Artist.objects.all()
+
+
+artist_list_view = ArtistListView.as_view()
