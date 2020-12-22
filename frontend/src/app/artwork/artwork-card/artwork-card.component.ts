@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Artwork, DisplayMode } from '../../models';
+import { Artwork } from '../../models';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,8 +9,6 @@ import { Router } from '@angular/router';
 })
 export class ArtworkCardComponent implements OnInit {
   @Input() artwork: Artwork;
-  @Input() displayMode: DisplayMode;
-  DisplayMode = DisplayMode;
 
   defaultImage = '/assets/logo.png';
 

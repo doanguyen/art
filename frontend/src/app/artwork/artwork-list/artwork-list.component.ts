@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ArtworkService } from '../../services/artwork.service';
 import { combineLatest, Observable } from 'rxjs';
-import { ArtworkResponse, DisplayMode } from '../../models';
+import { ArtworkResponse } from '../../models';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,7 +17,6 @@ import { ArtworkModifyComponent } from '../artwork-modify/artwork-modify.compone
 })
 export class ArtworkListComponent implements OnInit {
   artworksResponse$: Observable<ArtworkResponse>;
-  displayMode = DisplayMode.Card;
   nationality$ = this.artistService.listNationality$;
   page: number;
   keyword: string;

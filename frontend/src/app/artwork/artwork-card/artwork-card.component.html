@@ -1,4 +1,4 @@
-<ng-container *ngIf="displayMode == DisplayMode.Card; else ListDisplay">
+<ng-container>
   <mat-card class="card-height pointer" (click)="gotoArtwork(artwork)">
     <img
       mat-card-image
@@ -14,6 +14,3 @@
     </mat-card-content>
   </mat-card>
 </ng-container>
-<ng-template #ListDisplay>
-  Hello world
-</ng-template>
