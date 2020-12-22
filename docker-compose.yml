@@ -2,17 +2,25 @@ version: "3.7"
 services:
   frontend:
     build: frontend
+    ports:
+      - "4200:4200"
     volumes:
       - ./frontend/:/app/
-    ports:
-      - "8000:8000"
+
   backend:
     build: backend
+    ports:
+      - "8000:8000"
     volumes:
       - ./backend/:/app/
   db:
-    image: postegres:12.1
+    image: postgres:12.1
+    volumes:
+    - pgdata:/var/lib/postgresql/data
+    - ./docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/:ro
     environment:
       POSTGRES_USER: art
       POSTGRES_PASSWORD: changeme  # dev only
       POSTGRES_DB: art_db
+volumes:
+  pgdata:
