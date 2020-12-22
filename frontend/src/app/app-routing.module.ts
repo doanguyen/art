@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomepageComponent } from './homepage/homepage.component';
 import { ArtworkModule } from './artwork/artwork.module';
 import { ArtistModule } from './artist/artist.module';
 
 const routes: Routes = [
-  { path: '', component: HomepageComponent },
+  { path: '', redirectTo: '/artworks', pathMatch: 'full' },
   {
     path: 'artworks',
     loadChildren: (): Promise<ArtworkModule> =>
