@@ -82,7 +82,7 @@ class ArtistNationalityView(APIView):
 
     def get(self, request):
         values = Artist.objects.values_list("Nationality", flat=True).distinct()
-        return Response([value for value in values if value])
+        return Response(sorted([value for value in values if value]))
 
 
 artist_nationality_view = ArtistNationalityView.as_view()
