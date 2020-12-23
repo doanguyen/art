@@ -23,7 +23,10 @@ export class ArtworkListComponent implements OnInit {
   keyword: string;
   nationality: string;
 
-  filterFormGroup: FormGroup;
+  filterFormGroup: FormGroup = this.fb.group({
+    keyword: [''],
+    nationality: ['']
+  });
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
@@ -46,10 +49,6 @@ export class ArtworkListComponent implements OnInit {
       }),
       switchMap(([params]) => this.artworkService.queryArtworks(params))
     );
-    this.filterFormGroup = this.fb.group({
-      keyword: [''],
-      nationality: ['']
-    });
   }
 
   gotoFilter(): void {
