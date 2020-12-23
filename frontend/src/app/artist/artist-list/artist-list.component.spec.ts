@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ArtistListComponent } from './artist-list.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ArtistService } from '../../services/artist.service';
+import { of } from 'rxjs';
 
 describe('ArtistListComponent', () => {
   let component: ArtistListComponent;
@@ -8,6 +11,10 @@ describe('ArtistListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
+      providers: [
+        { provide: ArtistService, useValue: { queryArtist: () => of([]) } }
+      ],
       declarations: [ArtistListComponent]
     }).compileComponents();
   });
