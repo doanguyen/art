@@ -60,7 +60,7 @@ export class ArtworkModifyComponent implements OnInit {
 
   modifyFail(): void {
     this.snackbar.open(
-      `Artwork is failed to ${this.artwork ? 'updat' : 'create'}`,
+      `Artwork is failed to ${this.artwork ? 'update' : 'create'}`,
       'Close',
       { duration: 2000 }
     );
