@@ -1,7 +1,7 @@
 <div *ngIf="artistResponse$ | async as artistResponse; else loading">
   <h1>Artists ({{ artistResponse.count }} artists)</h1>
   <div class="row pb-4">
-    <div *ngFor="let artist of artistResponse.results" class="col-4 py-1">
+    <div *ngFor="let artist of artistResponse.results" class="col-6 py-2 artist-item">
       <a (click)="gotoArtworkByArtist(artist)">
         {{ artist.DisplayName }}
       </a>
